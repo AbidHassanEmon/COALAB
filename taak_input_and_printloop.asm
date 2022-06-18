@@ -1,0 +1,73 @@
+.MODEL SMALL
+.STACK 100H
+.CODE
+
+.DATA
+MSG DB "Enter your input$"
+MSG1 DB "Output loop is on:$"
+
+MAIN PROC
+MOV AX,@DATA
+MOV DS,AX 
+
+
+MOV CX,5 ;loop counting
+
+LEA DX, MSG
+MOV AH, 9
+INT 21h
+        
+MOV AH,2
+MOV DL,0DH
+INT 21H
+MOV AH,2
+MOV DL,0AH
+INT 21H
+
+        
+mov ah,1 
+int 21h  
+mov bl,al
+
+MOV AH,2
+MOV DL,0DH
+INT 21H
+MOV AH,2
+MOV DL,0AH
+INT 21H
+
+LEA DX, MSG1
+MOV AH, 9
+INT 21h 
+
+MOV AH,2
+MOV DL,0DH
+INT 21H
+MOV AH,2
+MOV DL,0AH
+INT 21H
+
+PRINT_LOOP:
+
+mov ah,2
+mov dl,bl
+int 21h 
+
+MOV AH,2
+MOV DL,0DH
+INT 21H
+MOV AH,2
+MOV DL,0AH
+INT 21H 
+          
+          
+DEC CX
+
+ JG PRINT_LOOP 
+   
+MOV AH,4CH
+INT 21H 
+
+    
+MAIN ENDP
+END MAIN
